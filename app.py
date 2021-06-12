@@ -1,5 +1,7 @@
-from telegram.ext import Updater, CommandHandler
+from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
 from command_handlers.start import start_handler
+from command_handlers.login import login_handler
+from message_handlers.message import message_handler
 import logging
 import config
 
@@ -15,9 +17,19 @@ dispatcher = updater.dispatcher
 def start(update, context):
     start_handler(update, context)
 
+def login(update, context):
+    login_handler(update, context)
+
+def message(update, context):
+
+
 start_command_handler = CommandHandler('start', start)
+login_command_handler = CommandHandler('login', login)
+message_handler = MessageHandler(Filters.text, message)
 
 dispatcher.add_handler(start_command_handler)
+dispatcher.add_handler(login_command_handler)
+dispatcher.add_handler(message_handler)
 
 updater.start_polling()
 updater.idle()

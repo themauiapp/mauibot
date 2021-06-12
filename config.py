@@ -11,4 +11,4 @@ def set():
     config = {"app_root": app_root, "bot_token": os.environ.get('BOT_TOKEN')}
 
 def get(key):
-    return config[key]
+    return config.get(key)

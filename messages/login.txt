@@ -1,0 +1,3 @@
+Alrighty, for me to log you in on here, send me your Maui email and password in the format
+<b>{email} {password}</b>. So say your email address is johndoe@ymail.com and your password is 
+12345678, you would be sending me johndoe@ymail.com 12345678.
