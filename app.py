@@ -21,15 +21,15 @@ def login(update, context):
     login_handler(update, context)
 
 def message(update, context):
-
+    message_handler(update, context)
 
 start_command_handler = CommandHandler('start', start)
 login_command_handler = CommandHandler('login', login)
-message_handler = MessageHandler(Filters.text, message)
+message_command_handler = MessageHandler(Filters.text, message)
 
 dispatcher.add_handler(start_command_handler)
 dispatcher.add_handler(login_command_handler)
-dispatcher.add_handler(message_handler)
+dispatcher.add_handler(message_command_handler)
 
 updater.start_polling()
 updater.idle()
