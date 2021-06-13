@@ -43,7 +43,7 @@ def login_complete(update, context):
     client = get_client(chat_id)
     query_params = { 'email':email, 'password':password, 'telegram_id':chat_id }
     response = client.execute(LOGIN, variable_values=query_params)
-    data = response['statelessLogin']
+    data = response['telegramLogin']
 
     if data['errorId'] is not None: 
         return handle_error(chat_id, data['errorId'], context)

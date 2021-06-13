@@ -12,11 +12,17 @@ def get():
         users = json.load(reader)
     return users
 
-def set(users, telegram_id, user):
-    users[telegram_id] = user
+def set(users, telegram_id=None, user=None):
+    if telegram_id is not None:
+        users[telegram_id] = user
     with open(get_users_path(), 'w') as writer: 
         json.dump(users, writer)
 
 def record(telegram_id, user):
     users = get()
     set(users, telegram_id, user)
+
+def delete(telegram_id):
+    users = get()
+    del users[telegram_id]
+    set(users)

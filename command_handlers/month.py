@@ -2,6 +2,7 @@ from telegram import ChatAction
 from datetime import datetime
 from client import get as get_client
 from graphql_operations.income import CURRENTMONTHINCOME
+from utilities.actions import record as record_action
 from utilities.users import get as get_users
 import config
 import os.path as path
@@ -12,6 +13,7 @@ def month_handler(update, context):
     client = get_client(chat_id)
     response = client.execute(CURRENTMONTHINCOME)
     data = response['currentMonthIncome']
+    record_action(chat_id, 'thismonth')
 
     if data is None:
         text = 'Hmmm. I cannot find any income information belonging to you for this month.'

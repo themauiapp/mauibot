@@ -8,7 +8,7 @@ def authenticated(handler):
         users = get_users()
 
         if users.get(chat_id) is None:
-            text = "I'm sorry. I do not know who you are. Login and I can process this your command."
+            text = "I'm sorry. I do not know who you are. Login and I can process that command."
             return context.bot.send_message(chat_id=chat_id, text=text)
         
         return handler(update, context)

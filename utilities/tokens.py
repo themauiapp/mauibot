@@ -12,11 +12,17 @@ def get():
         tokens = json.load(reader)
     return tokens
 
-def set(tokens, telegram_id, token):
-    tokens[telegram_id] = token
+def set(tokens, telegram_id=None, token=None):
+    if telegram_id is not None:
+        tokens[telegram_id] = token
     with open(get_tokens_path(), 'w') as writer: 
         json.dump(tokens, writer)
 
 def record(telegram_id, token):
     tokens = get()
     set(tokens, telegram_id, token)
+
+def delete(telegram_id):
+    tokens = get()
+    del tokens[telegram_id]
+    set(tokens)
