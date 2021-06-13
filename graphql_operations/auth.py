@@ -7,6 +7,7 @@ LOGIN = gql('''
                 user {
                     name
                     email
+                    currency
                 }
                 errorId
                 token

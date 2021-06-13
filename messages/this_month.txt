@@ -1,0 +1,6 @@
+Here is your roundup for this month {0}
+
+{1} in total income 
+{2} spent ({3})
+{4} remaining ({5})
+{6} unique expenses
