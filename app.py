@@ -2,6 +2,7 @@ from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
 from command_handlers.start import start_handler
 from command_handlers.login import login_handler
 from message_handlers.message import message_handler
+from middlewares.auth import authenticated, guest
 import logging
 import config
 
@@ -17,6 +18,7 @@ dispatcher = updater.dispatcher
 def start(update, context):
     start_handler(update, context)
 
+@guest
 def login(update, context):
     login_handler(update, context)
 

@@ -1,4 +1,5 @@
 from telegram import ParseMode
+from utilities.actions import record as record_action
 import config
 import random
 import os
@@ -11,4 +12,5 @@ def start_handler(update, context):
     with open(os.path.join(app_root, 'messages', 'start.txt'), 'r') as reader:
         text = reader.read().format(greeting)
     
+    record_action(chat_id, 'start')
     context.bot.send_message(chat_id=chat_id, text=text, parse_mode=ParseMode.HTML)

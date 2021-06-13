@@ -9,7 +9,7 @@ visit <a href="https://mauiapp.xyz">https://mauiapp.xyz</a>.
 Here is a list of all my commands which is how we are going to be interacting
 /login - login here on Telegram
 /me - view your maui details
-/now - view your expense details for the current month
+/now - view your income and expense details for the current month
 /add - add an expense
 /view - view expenses for a particular date
 /logout - logout here on Telegram
