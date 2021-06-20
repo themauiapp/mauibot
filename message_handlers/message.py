@@ -1,5 +1,7 @@
 from telegram import ChatAction
 from message_handlers.login_complete import login_complete
+from message_handlers.add_initial import add_initial
+from message_handlers.add_final import add_final
 from message_handlers.logout_complete import logout_complete
 from utilities.actions import get_latest as get_latest_action
 
@@ -11,8 +13,14 @@ def message_handler(update, context):
     if latest_action == "login":
         return login_complete(update, context)
 
+    if latest_action == "add":
+        return add_initial(update, context)
+
+    if latest_action == "add_initial":
+        return add_final(update, context)
+
     if latest_action == "logout":
         return logout_complete(update, context)
 
-    text = "Hmmm. I'm sorry. I don't think we have communicated before."
+    text = "Hmmm. I'm sorry. I don't understand that."
     return context.bot.send_message(chat_id=chat_id, text=text)

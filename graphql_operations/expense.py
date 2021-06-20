@@ -15,3 +15,12 @@ DAILYEXPENSES = gql('''
             }
         }
     ''')
+
+ADDEXPENSE = gql('''
+        mutation AddExpense($name: String!, $amount: Float!) {
+            addExpense(name: $name, amount: $amount) {
+                sum
+                errorId
+            }
+        }
+    ''')
