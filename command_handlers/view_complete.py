@@ -25,17 +25,19 @@ def fetch_expenses(chat_id, date):
     query_params = {"date": date, "all": True}
     return client.execute(DAILYEXPENSES, variable_values=query_params)
 
-def parse_text(chat_id, data, date):
+def parse_text(chat_id, data, date, today = False):
     day = date.strftime("%d")
     parsed_date = date.strftime("%A, {0} %B %Y").format(get_suffixed_day(int(day)))
+    user = get_users()[chat_id]
+    currency = user['currency']
+    name = user['name'].split(' ')[1]
 
     if data['sum'] == 0:
-        text = 'I cannot find any expenses for {0}'.format(parsed_date)
+        text = 'You have not spent anything today {0}.'.format(name) if today else 'I cannot find any expenses for {0}'.format(parsed_date)
         return text
 
-    currency = get_users()[chat_id]['currency']
     expenses_sum = currency +  "{:,}".format(data['sum'])
-    text = 'On {0} you spent {1}\n'.format(parsed_date, expenses_sum)
+    text = 'You have spent {0} today. Here is the breakdown.\n'.format(expenses_sum) if today else 'On {0} you spent {1}\n'.format(parsed_date, expenses_sum)
     for expense in data['expenses']:
         name = expense['name']
         amount = currency + "{:,}".format(expense['amount'])

@@ -13,7 +13,6 @@ def add_final(update, context):
         text = 'Please enter a valid amount.'
         return context.bot.send_message(chat_id=chat_id, text=text)
 
-    print(amount)
     expense = get_expenses()[chat_id]
     params = {"name": expense, "amount": float(amount)}
     client = get_client(chat_id)

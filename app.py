@@ -6,6 +6,7 @@ from command_handlers.logout import logout_handler
 from command_handlers.add import add_handler
 from command_handlers.view import view_handler
 from command_handlers.view_complete import view_complete_handler
+from command_handlers.today import today_handler
 from message_handlers.message import message_handler
 from middlewares.auth import authenticated, guest
 import logging
@@ -44,6 +45,10 @@ def view_complete(update, context):
     view_complete_handler(update, context)
 
 @authenticated
+def today(update, context):
+    today_handler(update, context)
+
+@authenticated
 def logout(update, context):
     logout_handler(update, context)
 
@@ -56,6 +61,7 @@ this_month_command_handler = CommandHandler('thismonth', month)
 add_command_handler = CommandHandler('add', add)
 view_command_handler = CommandHandler('view', view)
 view_complete_command_handler = CallbackQueryHandler(view_complete)
+today_command_handler = CommandHandler('today', today);
 logout_command_handler = CommandHandler('logout', logout)
 message_command_handler = MessageHandler(Filters.text, message)
 
@@ -65,6 +71,7 @@ dispatcher.add_handler(this_month_command_handler)
 dispatcher.add_handler(add_command_handler)
 dispatcher.add_handler(view_command_handler)
 dispatcher.add_handler(view_complete_command_handler)
+dispatcher.add_handler(today_command_handler)
 dispatcher.add_handler(logout_command_handler)
 dispatcher.add_handler(message_command_handler)
 
