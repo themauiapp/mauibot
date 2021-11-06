@@ -1,6 +1,7 @@
 from gql import gql
 
-LOGIN = gql('''
+LOGIN = gql(
+    """
         mutation TelegramLogin($email: String!, $password: String!, $telegram_id: String!) {
             telegramLogin(email: $email, password: $password, telegram_id: $telegram_id) {
                 message
@@ -13,12 +14,15 @@ LOGIN = gql('''
                 token
             }
         }
-        ''')
+        """
+)
 
-LOGOUT = gql(''' 
+LOGOUT = gql(
+    """ 
         mutation TelegramLogout {
             telegramLogout {
                 message
             }
         }
-        ''')
+        """
+)

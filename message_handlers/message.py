@@ -5,6 +5,7 @@ from message_handlers.add_final import add_final
 from message_handlers.logout_complete import logout_complete
 from utilities.actions import get_latest as get_latest_action
 
+
 def message_handler(update, context):
     chat_id = str(update.effective_chat.id)
     latest_action = get_latest_action(chat_id)

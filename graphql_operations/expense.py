@@ -1,6 +1,7 @@
 from gql import gql
 
-DAILYEXPENSES = gql('''
+DAILYEXPENSES = gql(
+    """
         query DailyExpenses($date: String!, $all: Boolean) {
             dailyExpenses(date: $date, all: $all) {
                 expenses {
@@ -14,13 +15,16 @@ DAILYEXPENSES = gql('''
                 }
             }
         }
-    ''')
+    """
+)
 
-ADDEXPENSE = gql('''
+ADDEXPENSE = gql(
+    """
         mutation AddExpense($name: String!, $amount: Float!) {
             addExpense(name: $name, amount: $amount) {
                 sum
                 errorId
             }
         }
-    ''')
+    """
+)

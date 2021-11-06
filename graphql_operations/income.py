@@ -1,6 +1,7 @@
 from gql import gql
 
-CURRENTMONTHINCOME = gql(''' 
+CURRENTMONTHINCOME = gql(
+    """ 
         query CurrentMonthIncome {
             currentMonthIncome {
                 total
@@ -9,9 +10,11 @@ CURRENTMONTHINCOME = gql('''
                 expenses_count
             }
         }
-    ''')
+    """
+)
 
-INCOMESTATS = gql('''
+INCOMESTATS = gql(
+    """
         query IncomeStats {
             incomeStats {
                 income_total
@@ -19,4 +22,5 @@ INCOMESTATS = gql('''
                 income_remainder
             }
         }
-    ''')
+    """
+)
