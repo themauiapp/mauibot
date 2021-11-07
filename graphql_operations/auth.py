@@ -6,6 +6,7 @@ LOGIN = gql(
             telegramLogin(email: $email, password: $password, telegram_id: $telegram_id) {
                 message
                 user {
+                    id
                     name
                     email
                     currency
