@@ -16,6 +16,7 @@ def view_complete_handler(update, context):
     context.bot.send_chat_action(chat_id=chat_id, action=ChatAction.TYPING)
     formatted_date = date.strftime("%Y-%m-%d")
     response = fetch_expenses(chat_id, formatted_date)
+    print(response)
     data = response["dailyExpenses"]
     text = parse_text(chat_id, data, date)
     record_action(chat_id, "view_complete")
@@ -28,7 +29,6 @@ def fetch_expenses(chat_id, date):
     client = get_client(chat_id)
     query_params = {"date": date, "all": True}
     return client.execute(DAILYEXPENSES, variable_values=query_params)
-
 
 def parse_text(chat_id, data, date, today=False):
     day = date.strftime("%d")
