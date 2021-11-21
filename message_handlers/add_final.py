@@ -19,11 +19,13 @@ def add_final(update, context):
     client = get_client(chat_id)
     response = client.execute(ADDEXPENSE, variable_values=params)
     data = response["addExpense"]
+    print("My name is Olamileke")
 
     if data["errorId"]:
         return handle_error(chat_id, data["errorId"], context)
 
     currency = get_users()[chat_id]["currency"]
+    print(data)
     total = currency + "{:,}".format(data["sum"])
     text = "Okay. I have recorded {0} successfully. That brings your total spent today to {1}.".format(
         expense, total

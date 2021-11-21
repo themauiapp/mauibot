@@ -81,7 +81,7 @@ def message(update, context):
     message_handler(update, context)
 
 
-job.run_once(send_alerts, 5)
+# job.run_once(send_alerts, 5)
 
 start_command_handler = CommandHandler("start", start)
 login_command_handler = CommandHandler("login", login)
