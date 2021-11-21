@@ -1,9 +1,12 @@
+from logging import exception
 from telegram import ChatAction, ReplyKeyboardRemove
 from utilities.actions import record as record_action
 from utilities.users import get as get_users
+from utilities.error_handler import handle_error
 from client import get as get_client
 from graphql_operations.expense import DAILYEXPENSES
 import packages.calendar as calendar
+import sys
 
 
 def view_complete_handler(update, context):
@@ -13,16 +16,20 @@ def view_complete_handler(update, context):
     if not selected:
         return
 
-    context.bot.send_chat_action(chat_id=chat_id, action=ChatAction.TYPING)
-    formatted_date = date.strftime("%Y-%m-%d")
-    response = fetch_expenses(chat_id, formatted_date)
-    print(response)
-    data = response["dailyExpenses"]
-    text = parse_text(chat_id, data, date)
-    record_action(chat_id, "view_complete")
-    context.bot.send_message(
-        chat_id=chat_id, text=text, reply_markup=ReplyKeyboardRemove()
-    )
+    try:
+        context.bot.send_chat_action(chat_id=chat_id, action=ChatAction.TYPING)
+        formatted_date = date.strftime("%Y-%m-%d")
+        response = fetch_expenses(chat_id, formatted_date)
+        print(response)
+        data = response["dailyExpenses"]
+        text = parse_text(chat_id, data, date)
+        record_action(chat_id, "view_complete")
+        context.bot.send_message(
+            chat_id=chat_id, text=text, reply_markup=ReplyKeyboardRemove()
+        )
+    except Exception:
+        exception = sys.exc_info()
+        return handle_error(chat_id, context, exception)
 
 
 def fetch_expenses(chat_id, date):

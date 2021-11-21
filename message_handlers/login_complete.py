@@ -6,6 +6,7 @@ from utilities.tokens import record as record_token
 from utilities.users import record as record_user, get as get_users
 from utilities.error_handler import handle_error
 import re
+import sys
 
 
 def validate(update, context):
@@ -42,21 +43,26 @@ def login_complete(update, context):
 
     email, password = update.message.text.split(" ")
 
-    client = get_client(chat_id)
-    query_params = {"email": email, "password": password, "telegram_id": chat_id}
-    response = client.execute(LOGIN, variable_values=query_params)
-    data = response["telegramLogin"]
+    try:
+        client = get_client(chat_id)
+        query_params = {"email": email, "password": password, "telegram_id": chat_id}
+        response = client.execute(LOGIN, variable_values=query_params)
 
-    if data["errorId"] is not None:
-        return handle_error(chat_id, data["errorId"], context)
+        data = response["telegramLogin"]
 
-    token = data["token"]
-    record_token(chat_id, token)
-    record_action(chat_id, "login_complete")
-    record_user(chat_id, data["user"])
+        if data["errorId"] is not None:
+            return handle_error(chat_id, context, None, data["errorId"])
 
-    name = data["user"]["name"].split(" ")[1]
-    text = "Hello {0}. Really nice to meet you. I trust we will have a fun time together. I'm ready and at your service.".format(
-        name
-    )
-    context.bot.send_message(chat_id=chat_id, text=text)
+        token = data["token"]
+        record_token(chat_id, token)
+        record_action(chat_id, "login_complete")
+        record_user(chat_id, data["user"])
+
+        name = data["user"]["name"].split(" ")[1]
+        text = "Hello {0}. Really nice to meet you. I trust we will have a fun time together. I'm ready and at your service.".format(
+            name
+        )
+        context.bot.send_message(chat_id=chat_id, text=text)
+    except Exception:
+        exception = sys.exc_info()
+        return handle_error(chat_id, context, exception)

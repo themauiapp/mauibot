@@ -1,7 +1,24 @@
 from utilities.users import get as get_users
+from utilities.logs import record as record_exception
+import traceback
 
+def handle_error(chat_id, context, exception=None, error_id=None):
+    error_text = "I'm sorry. I encountered an error carrying out that operation. Try again later and I should have it all sorted out."
 
-def handle_error(chat_id, error_id, context):
+    if exception:
+        parsed_exception = {
+            "message": str(exception[1]),
+            "type": str(exception[0]),
+            "stack_trace": " ".join(traceback.format_exception(*exception)),
+        }
+        record_exception(parsed_exception)
+
+    if error_id:
+        error_text = get_error_text(error_id)
+
+    return context.bot.send_message(chat_id=chat_id, text=error_text)
+
+def get_error_text(error_id):
     error_text = "I'm sorry. I encountered an error carrying out that operation. Try again later and I should have it all sorted out."
     if error_id == "AuthenticationFailed":
         error_text = (
@@ -11,4 +28,4 @@ def handle_error(chat_id, error_id, context):
     if error_id == "AuthenticatedToTelegramAlready":
         error_text = "You are logged in already on a different Telegram account."
 
-    return context.bot.send_message(chat_id=chat_id, text=error_text)
+    return error_text
