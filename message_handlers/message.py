@@ -23,5 +23,5 @@ def message_handler(update, context):
     if latest_action == "logout":
         return logout_complete(update, context)
 
-    text = "Hmmm. I'm sorry. I don't understand that."
+    text = "Hmmm. I'm sorry. I don't understand that. Type /start to see a list of my commands."
     return context.bot.send_message(chat_id=chat_id, text=text)
