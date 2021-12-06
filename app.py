@@ -105,5 +105,7 @@ dispatcher.add_handler(summary_command_handler)
 dispatcher.add_handler(logout_command_handler)
 dispatcher.add_handler(message_command_handler)
 
-updater.start_polling()
+updater.start_webhook(listen=config.get("bot_host"), port=config.get("bot_port"), url_path=config.get("bot_token"))
+updater.bot.set_webhook(url="{0}{1}".format(config.get("bot_url"), config.get("bot_token")))
+
 updater.idle()

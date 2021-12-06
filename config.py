@@ -10,6 +10,9 @@ def set():
 def get(key=None):
     config = {
         "app_root": app_root,
+        "bot_host": os.environ.get("BOT_HOST"),
+        "bot_port": os.environ.get("BOT_PORT"),
+        "bot_url": os.environ.get("BOT_URL"),
         "bot_token": os.environ.get("BOT_TOKEN"),
         "api_url": os.environ.get("GRAPHQL_API_URL"),
     }

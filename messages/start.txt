@@ -1,10 +1,10 @@
-{0} I am MauiBot the accompanying bot to the <a href="https://mauiapp.xyz">Maui</a> app.
+{0} I am MauiBot the accompanying bot to the <a href="https://mauii.app">Maui</a> app.
 
 I can help you record your expenses, fetch expenses from the Maui app for you to view and just be your
 all round fun companion.
 
 To find out more about me or if you are just curious about what Maui is and what we are all about, 
-visit <a href="https://mauiapp.xyz">https://mauiapp.xyz</a>.
+visit <a href="https://mauii.app">https://mauii.app</a>.
 
 Here is a list of all my commands which is how we are going to be interacting
 /login - login here on Telegram
@@ -16,6 +16,6 @@ Here is a list of all my commands which is how we are going to be interacting
 /logout - logout here on Telegram
 
 Oh yeah, I guess it should be obvious but if you don't have a Maui account, I cannot be of use to you
-and we cannot be pals sadly. Create one <a href="https://mauiapp.xyz/account/new">here</a>.
+and we cannot be pals sadly. Create one <a href="https://mauii.app/account/new">here</a>.
 
 Alright!, I think that is about all. Login and let's get started.
