@@ -18,7 +18,7 @@ def fetch_users():
     time = datetime.now((pytz.timezone('Africa/Lagos'))).strftime("%H%p").lower()
     time = time[1:] if time[0] == '0' else time
     client = get_client()
-    variables = {"time": "6pm"}
+    variables = {"time": time}
     response = client.execute(FETCHUSERSTONOTIFY, variable_values=variables)
     user_chat_ids = list(map(lambda user: user['telegram']['telegram_id'], response['usersByTelegramSetting']))
     users = list(filter(lambda user: user[0] in user_chat_ids , get_users().items()))

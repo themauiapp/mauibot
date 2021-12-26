@@ -17,8 +17,10 @@ from command_handlers.summary import summary_handler
 from message_handlers.message import message_handler
 from middlewares.auth import authenticated, guest
 from jobs.send_alerts import send_alerts
+from datetime import time
 import logging
 import config
+import os
 
 # Enable logging of errors
 logging.basicConfig(
@@ -27,6 +29,7 @@ logging.basicConfig(
 
 # Setting all relevant app configurations
 config.set()
+os.environ['TZ'] = 'Africa/Lagos'
 
 updater = Updater(token=config.get("bot_token"), use_context=True)
 dispatcher = updater.dispatcher
@@ -81,7 +84,9 @@ def message(update, context):
     message_handler(update, context)
 
 
-# job.run_once(send_alerts, 5)
+job.run_once(send_alerts, time(hour=12))
+job.run_once(send_alerts, time(hour=18))
+job.run_once(send_alerts, time(hour=22))
 
 start_command_handler = CommandHandler("start", start)
 login_command_handler = CommandHandler("login", login)
