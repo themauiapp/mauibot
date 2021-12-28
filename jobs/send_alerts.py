@@ -15,7 +15,7 @@ def send_alerts(context):
         alert.run()
 
 def fetch_users():
-    time = datetime.now((pytz.timezone('Africa/Lagos'))).strftime("%H%p").lower()
+    time = datetime.now((pytz.timezone('Africa/Lagos'))).strftime("%I%p").lower()
     time = time[1:] if time[0] == '0' else time
     client = get_client()
     variables = {"time": time}

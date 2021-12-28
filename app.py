@@ -20,6 +20,7 @@ from jobs.send_alerts import send_alerts
 from datetime import time
 import logging
 import config
+import pytz
 import os
 
 # Enable logging of errors
@@ -83,10 +84,10 @@ def logout(update, context):
 def message(update, context):
     message_handler(update, context)
 
-
-job.run_once(send_alerts, time(hour=12))
-job.run_once(send_alerts, time(hour=18))
-job.run_once(send_alerts, time(hour=22))
+# Setting all the jobs to alert users
+job.run_once(send_alerts, time(hour=12, minute=1, tzinfo=pytz.timezone('Africa/Lagos')))
+job.run_once(send_alerts, time(hour=18, minute=1, tzinfo=pytz.timezone('Africa/Lagos')))
+job.run_once(send_alerts, time(hour=22, minute=1, tzinfo=pytz.timezone('Africa/Lagos')))
 
 start_command_handler = CommandHandler("start", start)
 login_command_handler = CommandHandler("login", login)
