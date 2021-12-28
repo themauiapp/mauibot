@@ -17,7 +17,8 @@ from command_handlers.summary import summary_handler
 from message_handlers.message import message_handler
 from middlewares.auth import authenticated, guest
 from jobs.send_alerts import send_alerts
-from datetime import time
+from utilities.time import seconds_from_start
+import datetime
 import logging
 import config
 import pytz
@@ -30,7 +31,6 @@ logging.basicConfig(
 
 # Setting all relevant app configurations
 config.set()
-os.environ['TZ'] = 'Africa/Lagos'
 
 updater = Updater(token=config.get("bot_token"), use_context=True)
 dispatcher = updater.dispatcher
@@ -85,9 +85,7 @@ def message(update, context):
     message_handler(update, context)
 
 # Setting all the jobs to alert users
-job.run_once(send_alerts, time(hour=12, minute=1, tzinfo=pytz.timezone('Africa/Lagos')))
-job.run_once(send_alerts, time(hour=18, minute=1, tzinfo=pytz.timezone('Africa/Lagos')))
-job.run_once(send_alerts, time(hour=22, minute=1, tzinfo=pytz.timezone('Africa/Lagos')))
+job.run_repeating(send_alerts, interval=3600, first=seconds_from_start())
 
 start_command_handler = CommandHandler("start", start)
 login_command_handler = CommandHandler("login", login)

@@ -7,6 +7,9 @@ import pytz
 
 
 def send_alerts(context):
+    if not determine_valid_time():
+        return
+
     users = fetch_users()
 
     for chat_id, data in users:
@@ -22,4 +25,9 @@ def fetch_users():
     response = client.execute(FETCHUSERSTONOTIFY, variable_values=variables)
     user_chat_ids = list(map(lambda user: user['telegram']['telegram_id'], response['usersByTelegramSetting']))
     users = list(filter(lambda user: user[0] in user_chat_ids , get_users().items()))
+    print(users)
     return users
+
+def determine_valid_time():
+    hour = int(datetime.now((pytz.timezone('Africa/Lagos'))).strftime("%H"))
+    return hour == 12 or hour == 18 or hour == 22
