@@ -17,6 +17,7 @@ from command_handlers.summary import summary_handler
 from message_handlers.message import message_handler
 from middlewares.auth import authenticated, guest
 from jobs.send_alerts import send_alerts
+from jobs.backup import backup
 from utilities.time import seconds_from_start
 import datetime
 import logging
@@ -86,6 +87,9 @@ def message(update, context):
 
 # Setting all the jobs to alert users
 job.run_repeating(send_alerts, interval=3600, first=seconds_from_start())
+
+# Job to backup files to Dome
+job.run_repeating(backup, interval=604800, first=10)
 
 start_command_handler = CommandHandler("start", start)
 login_command_handler = CommandHandler("login", login)

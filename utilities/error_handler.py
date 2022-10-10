@@ -2,7 +2,7 @@ from utilities.users import get as get_users
 from utilities.logs import record as record_exception
 import traceback
 
-def handle_error(chat_id, context, exception=None, error_id=None):
+def handle_error(chat_id=None, context=None, exception=None, error_id=None):
     error_text = "I'm sorry. I encountered an error carrying out that operation. Try again later and I should have it all sorted out."
 
     if exception:
@@ -16,7 +16,8 @@ def handle_error(chat_id, context, exception=None, error_id=None):
     if error_id:
         error_text = get_error_text(error_id)
 
-    return context.bot.send_message(chat_id=chat_id, text=error_text)
+    if chat_id and context:
+        return context.bot.send_message(chat_id=chat_id, text=error_text)
 
 def get_error_text(error_id):
     error_text = "I'm sorry. I encountered an error carrying out that operation. Try again later and I should have it all sorted out."
