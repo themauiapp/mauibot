@@ -29,7 +29,7 @@ def backup(context):
         request_headers = {
             "Authorization": "Bearer {0}".format(config.get("dome_api_key"))
         }
-        request_url = "{0}/{1}".format(config.get("dome_api_url"), uuid)
+        request_url = "https://{0}.{1}".format(uuid, config.get("dome_api_url"))
         request_data = {"format": "json"}
 
         try:
