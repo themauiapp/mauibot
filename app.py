@@ -18,7 +18,6 @@ from message_handlers.message import message_handler
 from middlewares.auth import authenticated, guest
 from jobs.send_alerts import send_alerts
 from jobs.backup import backup
-from jobs.agape import trigger_agape_email
 from utilities.time import seconds_from_start
 import logging
 import config
@@ -88,9 +87,6 @@ job.run_repeating(send_alerts, interval=3600, first=seconds_from_start())
 
 # Job to backup files to Dome
 job.run_repeating(backup, interval=604800, first=10)
-
-# Trigger Daily Agape Emails
-job.run_repeating(trigger_agape_email, interval=86400, first=10)
 
 start_command_handler = CommandHandler("start", start)
 login_command_handler = CommandHandler("login", login)
